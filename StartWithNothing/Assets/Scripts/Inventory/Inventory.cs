@@ -18,11 +18,6 @@ public class Inventory : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-
-    }
-
     public void Toggle()
     {
         if (!Busy)
