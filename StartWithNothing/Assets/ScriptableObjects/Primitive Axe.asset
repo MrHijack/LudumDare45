@@ -15,5 +15,5 @@ MonoBehaviour:
   Name: Primitive Axe
   Id: 4
   StackSize: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: a19ba8a030027d94aa7be873369998e0, type: 3}
   Prefab: {fileID: 0}

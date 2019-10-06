@@ -15,5 +15,5 @@ MonoBehaviour:
   Name: Flint
   Id: 5
   StackSize: 4
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 48a205066b80de54f9e197617ffe4ba2, type: 3}
   Prefab: {fileID: 0}

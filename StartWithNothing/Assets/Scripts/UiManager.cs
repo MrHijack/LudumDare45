@@ -8,6 +8,7 @@ public class UiManager : MonoBehaviour
 {
     public Inventory Inventory;
     public FirstPersonController Player;
+    public CraftingInfo CraftingInfo;
 
     void Start()
     {
@@ -21,5 +22,10 @@ public class UiManager : MonoBehaviour
             Inventory.Toggle();
             Player.ToggleMouseLock();
         }
+    }
+
+    public void ToggleCraftingInfo()
+    {
+        CraftingInfo.Toggle();
     }
 }

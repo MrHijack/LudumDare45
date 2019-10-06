@@ -53,4 +53,14 @@ public class ItemResolver : MonoBehaviour
         return ItemCollection.Items.Where(entry => entry.Id == item.Id).FirstOrDefault();
     }
 
+    public static Item ResolveItem(ItemAsset asset)
+    {
+        return Instance.ResolveItemInternal(asset);
+    }
+
+    private Item ResolveItemInternal(ItemAsset asset)
+    {
+        return new Item(asset.Id, 0, asset.StackSize);
+    }
+
 }
