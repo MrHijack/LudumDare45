@@ -19,7 +19,7 @@ public class TerrainGenerator : MonoBehaviour
     List<Color> colors;
     Vector2[] uvs;
     Rectf clipRect;
-    Texture2D tex;
+   // Texture2D tex;
 
 
     // Start is called before the first frame update
@@ -49,7 +49,7 @@ public class TerrainGenerator : MonoBehaviour
         mesh = new Mesh();
         verticies = new List<Vector3>();
         triangles = new List<int>();
-        tex = new Texture2D(MapSize, MapSize);
+      //  tex = new Texture2D(MapSize, MapSize);
        // colors = new List<Color>(1024);
 
         foreach (KeyValuePair<Vector2f, Site> site in vor.SitesIndexedByLocation)
@@ -57,7 +57,7 @@ public class TerrainGenerator : MonoBehaviour
            // Color c = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
             Vector3 siteVec = new Vector3(site.Value.x, 0, site.Value.y);
             verticies.Add(siteVec);
-            tex.SetPixel(Mathf.RoundToInt(siteVec.x), Mathf.RoundToInt(siteVec.z), Color.red);
+           // tex.SetPixel(Mathf.RoundToInt(siteVec.x), Mathf.RoundToInt(siteVec.z), Color.red);
             int site_index = verticies.IndexOf(siteVec);
             List<Vector2f> verts = site.Value.Region(clipRect);
             int vert1_index, vert2_index;
@@ -123,7 +123,7 @@ public class TerrainGenerator : MonoBehaviour
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
         GetComponent<MeshFilter>().mesh = mesh;
-        GetComponent<MeshRenderer>().sharedMaterials[0].mainTexture = tex;
+        //GetComponent<MeshRenderer>().sharedMaterials[0].mainTexture = tex;
     }
 
     // Update is called once per frame
