@@ -15,5 +15,5 @@ MonoBehaviour:
   Name: Stone
   Id: 0
   StackSize: 4
-  Icon: {fileID: 0}
+  Icon: {fileID: -4356636643513245329, guid: 23a1a6fbf09aad44390b2c44ec0744ff, type: 3}
   Prefab: {fileID: 0}
