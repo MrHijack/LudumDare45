@@ -57,3 +57,10 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+StartWithNothing/.vs/StartWithNothing/v16/Server/sqlite3/storage.ide
+*.ide
+StartWithNothing/.vs/StartWithNothing/v16/.suo
+*.log
+*.json
+*.meta
+*.json

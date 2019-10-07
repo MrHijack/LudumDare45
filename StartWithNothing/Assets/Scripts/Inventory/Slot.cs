@@ -18,7 +18,7 @@ public class Slot : MonoBehaviour
 
     public Item? Content
     {
-        get => _content;
+        get => GetContent();
         set => SetContent(value);
     }
 
@@ -51,9 +51,20 @@ public class Slot : MonoBehaviour
         _quantity = quantity;
         if (_quantity < 1)
         {
-            Content = Item.Empty;
+            Content = null;
         }
         quantityText.text = _quantity.ToString();
+    }
+
+    private Item? GetContent()
+    {
+        if (_content.HasValue)
+        {
+            var item = _content.Value;
+            item.Quantity = _quantity;
+            return item;
+        }
+        return null;
     }
 
     private void SetSelected(bool selected)
