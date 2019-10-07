@@ -58,9 +58,9 @@ public class Slot : MonoBehaviour
 
     private Item? GetContent()
     {
-        if (Content.HasValue)
+        if (_content.HasValue)
         {
-            var item = Content.Value;
+            var item = _content.Value;
             item.Quantity = _quantity;
             return item;
         }
