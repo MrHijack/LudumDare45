@@ -62,3 +62,5 @@ StartWithNothing/.vs/StartWithNothing/v16/Server/sqlite3/storage.ide
 StartWithNothing/.vs/StartWithNothing/v16/.suo
 *.log
 *.json
+*.meta
+*.json

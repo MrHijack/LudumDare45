@@ -57,7 +57,7 @@ public class RecipeDisplay : MonoBehaviour
     private void SetCanCraft(bool canCraft)
     {
         _canCraft = canCraft;
-        craftButton.enabled = _canCraft;
+        craftButton.interactable = _canCraft;
     }
 
     public void Craft()
