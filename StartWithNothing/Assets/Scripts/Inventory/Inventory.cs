@@ -45,12 +45,12 @@ public class Inventory : MonoBehaviour
         if (!Open && scroll > 0f && scrollTimer <= 0)
         {
             scrollTimer = scrollDelay;
-            CurrentToolbar-=1;
+            CurrentToolbar -= 1;
         }
         if (!Open && scroll < 0f && scrollTimer <= 0)
         {
             scrollTimer = scrollDelay;
-            CurrentToolbar+=1;
+            CurrentToolbar += 1;
         }
     }
 
@@ -135,5 +135,43 @@ public class Inventory : MonoBehaviour
             }
         }
         return quantityToPickUp;
+    }
+
+    public bool RemoveItem(Item item)
+    {
+        if (SufficientQuantity(item))
+        {
+            var availableSlots = backpack.Where(entry => (entry.Content?.Id ?? -1) == item.Id && entry.Content != null);
+            var totalQuantityToRemove = item.Quantity;
+
+            foreach (var availableSlot in availableSlots)
+            {
+                var quantityToRemove = availableSlot.Quantity < totalQuantityToRemove ? availableSlot.Quantity : totalQuantityToRemove;
+                totalQuantityToRemove -= quantityToRemove;
+
+                availableSlot.Quantity -= quantityToRemove;
+
+                if (totalQuantityToRemove == 0)
+                {
+                    break;
+                }
+            }
+
+
+            return true;
+        }
+        return false;
+    }
+
+    public bool SufficientQuantity(Item item)
+    {
+        var avaibleQuantity = backpack.Where(entry => (entry.Content?.Id ?? -1) == item.Id && entry.Content != null).Sum(entry => entry.Quantity);
+        return avaibleQuantity >= item.Quantity;
+    }
+
+    public bool CanPickup(Item item)
+    {
+        var avaibleSpace = backpack.Where(entry => (entry.Content?.Id ?? item.Id) == item.Id && entry.Quantity < item.StackSize).Sum(entry => item.StackSize - entry.Quantity);
+        return avaibleSpace >= item.Quantity;
     }
 }

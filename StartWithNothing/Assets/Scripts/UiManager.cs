@@ -19,6 +19,10 @@ public class UiManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab) && !Inventory.Busy)
         {
+            if (CraftingInfo.Open)
+            {
+                CraftingInfo.ForceClose();
+            }
             Inventory.Toggle();
             Player.ToggleMouseLock();
         }

@@ -16,10 +16,21 @@ public class ItemDisplay : MonoBehaviour
         set => SetItem(value);
     }
 
+    public Color TextColor
+    {
+        get => quantityText.color;
+        set => SetColor(value);
+    }
+
     private void SetItem(Item item)
     {
         _item = item;
         quantityText.text = _item.Quantity.ToString();
         itemDisplay.sprite = ItemResolver.ResolveSprite(_item);
+    }
+
+    private void SetColor(Color color)
+    {
+        quantityText.color = color;
     }
 }

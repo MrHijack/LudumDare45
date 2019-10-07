@@ -51,7 +51,7 @@ public class Slot : MonoBehaviour
         _quantity = quantity;
         if (_quantity < 1)
         {
-            Content = Item.Empty;
+            Content = null;
         }
         quantityText.text = _quantity.ToString();
     }
