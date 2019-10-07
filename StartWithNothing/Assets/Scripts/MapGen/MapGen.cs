@@ -39,8 +39,10 @@ public class MapGen : MonoBehaviour
         GenerateVoronoi();
         VoronoiTerrain();
         
-        SmoothEdges(20);
+        
         PerlinMap();
+        PaintTexture();
+        SmoothEdges(20);
     }
 
     private void ResetTerrain()
@@ -76,8 +78,8 @@ public class MapGen : MonoBehaviour
             perliny = 0;
             for (int z = 0; z < terraData.heightmapResolution; z++, perliny += perlinSteps)
             {
-               
-                terraheight[x,z] = terraheight[x, z] + (( Mathf.PerlinNoise(perlinx, perliny) + 0.2f) * perlinAmplifier) / (float)(terraData.size.y - sealevel);
+               if(terraData.GetHeight(x,z) > sealevel)
+                    terraheight[x,z] = terraheight[x, z] + (( Mathf.PerlinNoise(perlinx, perliny) + 0.2f) * perlinAmplifier) / (float)(terraData.size.y - sealevel);
             }
         }
 
@@ -224,8 +226,8 @@ public class MapGen : MonoBehaviour
             {
                 float h = terraData.GetHeight(x, y);
                 if (h < sealevel + 2) continue;
-                alphas[y, x,  GRASS] = alphas[y, x ,GRASS] + 0.2f;
-                alphas[y, x,  SAND] = alphas[y, x, SAND] - 0.2f;
+                alphas[y, x,  GRASS] = 1f;
+                alphas[y, x,  SAND] = 0f;
             }
         }
 
@@ -246,7 +248,7 @@ public class MapGen : MonoBehaviour
           //  VoronoiTerrain();
           //  SmoothEdges(5);
           //  PerlinMap();
-            PaintTexture();
+           // PaintTexture();
         }
     }
 }

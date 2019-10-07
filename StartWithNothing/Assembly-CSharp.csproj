@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MapGen.cs" />
     <Compile Include="Assets\ScriptableObjects\CraftingRecipes.cs" />
     <Compile Include="Assets\ScriptableObjects\ItemAsset.cs" />
     <Compile Include="Assets\ScriptableObjects\ItemCollection.cs" />
@@ -93,13 +92,15 @@
     <Compile Include="Assets\Scripts\MapGen\Geom\Rectf.cs" />
     <Compile Include="Assets\Scripts\MapGen\Geom\Vector2f.cs" />
     <Compile Include="Assets\Scripts\MapGen\Geom\Winding.cs" />
+    <Compile Include="Assets\Scripts\MapGen\MapGen.cs" />
     <Compile Include="Assets\Scripts\MapGen\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MapGen\MeshHelper.cs" />
     <Compile Include="Assets\Scripts\MapGen\TerrainGen.cs" />
+    <Compile Include="Assets\Scripts\MapGen\TerrainGenerator.cs" />
+    <Compile Include="Assets\Scripts\MapGen\Waterwave.cs" />
     <Compile Include="Assets\Scripts\PickableResource.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\UiManager.cs" />
-    <Compile Include="Assets\TerrainGenerator.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Flox/LudumDare45/StartWithNothing/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
