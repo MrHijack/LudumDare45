@@ -207,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98448069}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 123, y: 4.8, z: 0}
+  m_LocalPosition: {x: 123, y: 24, z: 0}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &889106551
 MonoBehaviour:
@@ -337,7 +337,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainSize: 256
   perlinSteps: 0.02
-  perlinAmplifier: 1
+  perlinAmplifier: 1.5
+  sealevel: 24
 --- !u!154 &889106552
 TerrainCollider:
   m_ObjectHideFlags: 0

@@ -6,10 +6,11 @@ using csDelaunay;
 public class MapGen : MonoBehaviour
 {
     public int terrainSize = 256;
-    public float perlinSteps = 1;
+    public float perlinSteps = 0.2f;
     public float perlinAmplifier = 1;
+    public float sealevel = 24;
 
-    int timer = 10;
+    int timer = 5;
     float currentTimer;
 
     Terrain terra;
@@ -17,15 +18,17 @@ public class MapGen : MonoBehaviour
 
     Voronoi vor;
     Rectf clipRect;
+
+    
     void Start()
     {
         terra = GetComponent<Terrain>();
         terraData = terra.terrainData;
 
-        terraData.size = new Vector3(terrainSize, 10, terrainSize);
+        terraData.size = new Vector3(terrainSize, 40, terrainSize);
 
 
-
+        ResetTerrain();
 
         GenerationProcedure();
         currentTimer = timer;
@@ -35,10 +38,31 @@ public class MapGen : MonoBehaviour
     {
         GenerateVoronoi();
         VoronoiTerrain();
-        SmoothEdges(5);
+        
+        SmoothEdges(20);
         PerlinMap();
     }
 
+    private void ResetTerrain()
+    {
+        int GRASS = 0;
+        int SAND = 1;
+
+        float[,,] alphas = terraData.GetAlphamaps(0, 0, terraData.alphamapWidth, terraData.alphamapHeight);
+
+        Debug.Log(terraData.alphamapWidth);
+
+        for (int x = 0; x < terraData.alphamapWidth; x++)
+        {
+            for (int y = 0; y < terraData.alphamapHeight; y++)
+            {
+                alphas[y, x, GRASS] = 0f;
+                alphas[y, x, SAND] = 1f;
+            }
+        }
+
+        terraData.SetAlphamaps(0, 0, alphas);
+    }
 
     void PerlinMap()
     {
@@ -53,7 +77,7 @@ public class MapGen : MonoBehaviour
             for (int z = 0; z < terraData.heightmapResolution; z++, perliny += perlinSteps)
             {
                
-                terraheight[x,z] = terraheight[x,z] + Mathf.PerlinNoise(perlinx, perliny) * .5f;
+                terraheight[x,z] = terraheight[x, z] + (( Mathf.PerlinNoise(perlinx, perliny) + 0.2f) * perlinAmplifier) / (float)(terraData.size.y - sealevel);
             }
         }
 
@@ -124,7 +148,7 @@ public class MapGen : MonoBehaviour
             for (int z = 0; z < terraData.heightmapResolution; z++)
             {
                 if(PointIsInVoronoi(new Vector2f(x,z)))
-                    terraheight[x, z] = 0.5f;
+                    terraheight[x, z] = sealevel / terraData.size.y;
                 else
                     terraheight[x, z] = 0f;
             }
@@ -185,6 +209,29 @@ public class MapGen : MonoBehaviour
         terraData.SetHeights(0, 0, heightmap);
     }
 
+    void PaintTexture()
+    {
+        int GRASS = 0;
+        int SAND = 1;
+
+        float[,,] alphas = terraData.GetAlphamaps(0, 0, terraData.alphamapWidth, terraData.alphamapHeight);
+
+        Debug.Log(terraData.alphamapWidth);
+
+        for(int x = 0; x < terraData.alphamapWidth; x++)
+        {
+            for(int y = 0; y < terraData.alphamapHeight; y++)
+            {
+                float h = terraData.GetHeight(x, y);
+                if (h < sealevel + 2) continue;
+                alphas[y, x,  GRASS] = alphas[y, x ,GRASS] + 0.2f;
+                alphas[y, x,  SAND] = alphas[y, x, SAND] - 0.2f;
+            }
+        }
+
+        terraData.SetAlphamaps(0, 0, alphas);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -195,10 +242,11 @@ public class MapGen : MonoBehaviour
             // InitTerrain();
             // PerlinMap();
             // LowerSea();
-            GenerateVoronoi();
-            VoronoiTerrain();
-            SmoothEdges(5);
-            PerlinMap();
+           // GenerateVoronoi();
+          //  VoronoiTerrain();
+          //  SmoothEdges(5);
+          //  PerlinMap();
+            PaintTexture();
         }
     }
 }
